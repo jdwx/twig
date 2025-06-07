@@ -11,8 +11,8 @@
   "prefer-stable": true,
   "require": {
     "php": ">=8.3.0",
-    "jdwx/panels": "dev-main",
-    "jdwx/web": "dev-main",
+    "php-ds/php-ds": "^v1.5.0",
+    "jdwx/stream": "^1.0.0",
     "shapecode/twig-string-loader": "^1.1",
     "twig/twig": "^3.0"
   },

@@ -13,6 +13,9 @@ use JDWX\Twig\Tests\Shims\TwigTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 
+require_once __DIR__ . '/Shims/TwigTestCase.php';
+
+
 #[CoversClass( MapTwigStream::class )]
 final class MapTwigStreamTest extends TwigTestCase {
 

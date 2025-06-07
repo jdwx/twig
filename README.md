@@ -1,4 +1,4 @@
-# web-twig
+# twig
 
 A very thin module for integrate Twig templates into other modules.
 
@@ -7,10 +7,10 @@ A very thin module for integrate Twig templates into other modules.
 You can require it directly with Composer:
 
 ```bash
-composer require jdwx/web-twig
+composer require jdwx/twig
 ```
 
-Or download the source from GitHub: https://github.com/jdwx/web-twig.git
+Or download the source from GitHub: https://github.com/jdwx/twig.git
 
 ## Requirements
 
@@ -20,48 +20,22 @@ This module requires PHP 8.3, Twig 3.0 or later, and jdwx/web 2.0 or later.
 
 This module provides a simple interface for integrating Twig templates into the HtmlPage class provided by jdwx/web. The AbstractPage class can be subclassed to provide values when the template is rendered. The StaticPage class allows values to be provided when the page is instantiated. The MapPage class binds a Map that can be updated at any time.
 
-Here is a basic usage example of using the StaticPage class:
+Here is a basic usage example of using the StaticTwigStream class:
 
 ```php
-$env = TwigHelper::forDirectory( __DIR__ . '/templates/' );
-$page = new StaticPage( $env, 'static', [ 'name' => 'World' ] );
-echo $page, "\n\n";
+    $env = TwigHelper::forDirectory( __DIR__ . '/templates' );
+
+    $twig = new StaticTwigStream( $env, 'example', [ 'name' => 'Static' ] );
+    echo $twig, "\n"; # "Hello, Static!"
 ```
 
-```php
-$map = new Map();
-$page = new MapPage( $env, 'map', $map );
-$map->put( 'name', 'Galaxy' );
-echo $page, "\n\n";
-```
-
-You can also use subclasses to avoid repetitive code. For example, if you have all of your error page templates in one directory, you can create a subclass like this:
+and the MapTwigStream class:
 
 ```php
-class ErrorPage extends StaticPage {
-
-
-    /** @param array<string, mixed> $i_rValues */
-    public function __construct( string $name, array $i_rValues = [] ) {
-        # Give it the path to your error templates.
-        $env = TwigHelper::forDirectory( __DIR__ . '/templates/' );
-        parent::__construct( $env, $name, $i_rValues );
-    }
-
-
-    /** @param array<string, mixed> $i_rValues */
-    public static function get( string $name, array $i_rValues = [] ) : string {
-        return ( new self( $name, $i_rValues ) )->render();
-    }
-
-
-}
-```
-
-Then displaying errors is very straightforward:
-
-```php
-echo ErrorPage::get( 'error404', [ 'return_url' => '/' ] ), "\n\n";
+    $map = new Map();
+    $twig = new MapTwigStream( $env, 'example', $map );
+    $map->put( 'name', 'Map' );
+    echo $twig, "\n"; # "Hello, Map!"
 ```
 
 ## Stability
