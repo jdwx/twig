@@ -4,20 +4,23 @@
 declare( strict_types = 1 );
 
 
+namespace JDWX\Twig\Tests;
+
+
 use Ds\Map;
-use JDWX\Web\Twig\MapPage;
-use JDWX\Web\Twig\TwigHelper;
+use JDWX\Twig\MapTwigPage;
+use JDWX\Twig\TwigHelper;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 
-#[CoversClass( MapPage::class )]
+#[CoversClass( MapTwigPage::class )]
 final class MapPageTest extends TestCase {
 
 
     public function testRender() : void {
         $map = new Map();
-        $page = new MapPage( TwigHelper::forDirectory( __DIR__ . '/templates/' ), 'test', $map );
+        $page = new MapTwigPage( TwigHelper::forDirectory( __DIR__ . '/templates/' ), 'test', $map );
         $page->setTitle( 'TEST_TITLE' );
         $map->put( 'name', 'world' );
         $stPage = strval( $page );

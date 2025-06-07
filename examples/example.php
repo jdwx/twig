@@ -8,19 +8,22 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 
 use Ds\Map;
-use JDWX\Web\Twig\MapPage;
-use JDWX\Web\Twig\StaticPage;
-use JDWX\Web\Twig\TwigHelper;
+use JDWX\Panels\PanelPage;
+use JDWX\Twig\MapTwigPage;
+use JDWX\Twig\StaticTwigPage;
+use JDWX\Twig\StaticTwigPanel;
+use JDWX\Twig\TwigHelper;
 
 
-class ErrorPage extends StaticPage {
+class ErrorPage extends PanelPage {
 
 
     /** @param array<string, mixed> $i_rValues */
     public function __construct( string $name, array $i_rValues = [] ) {
         # Give it the path to your error templates.
         $env = TwigHelper::forDirectory( __DIR__ . '/templates/' );
-        parent::__construct( $env, $name, $i_rValues );
+        $panel = new StaticTwigPanel( $env, $name, $i_rValues );
+        parent::__construct( $panel );
     }
 
 
@@ -39,14 +42,14 @@ class ErrorPage extends StaticPage {
     echo "\n";
 
     $env = TwigHelper::forDirectory( __DIR__ . '/templates/' );
-    $page = new StaticPage( $env, 'static', [ 'name' => 'World' ] );
+    $page = new StaticTwigPage( $env, 'static', [ 'name' => 'World' ] );
     echo $page, "\n\n";
 
     $map = new Map();
-    $page = new MapPage( $env, 'map', $map );
+    $page = new MapTwigPage( $env, 'map', $map );
     $map->put( 'name', 'Galaxy' );
     echo $page, "\n\n";
 
-    echo ErrorPage::get( 'error404', [ 'return_url' => '/' ] ), "\n\n";
+    echo ErrorPage::get( 'error404', [ 'return_url' => '/foo/bar/baz' ] ), "\n\n";
 
 } )();

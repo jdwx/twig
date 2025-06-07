@@ -4,12 +4,15 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "JDWX\\Web\\Twig\\": "src/"
+      "JDWX\\Twig\\": "src/"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=8.3.0",
-    "jdwx/web": "^2.0",
+    "jdwx/panels": "dev-main",
+    "jdwx/web": "dev-main",
     "shapecode/twig-string-loader": "^1.1",
     "twig/twig": "^3.0"
   },

@@ -4,7 +4,10 @@
 declare( strict_types = 1 );
 
 
-use JDWX\Web\Twig\TwigHelper;
+namespace JDWX\Twig\Tests;
+
+
+use JDWX\Twig\TwigHelper;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

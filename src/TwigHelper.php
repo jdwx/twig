@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Twig;
+namespace JDWX\Twig;
 
 
 use Shapecode\Twig\Loader\StringLoader;

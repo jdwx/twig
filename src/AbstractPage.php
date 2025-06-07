@@ -4,40 +4,36 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Twig;
+namespace JDWX\Twig;
 
 
-use JDWX\Web\HtmlPage;
+use JDWX\Panels\CssListTrait;
+use JDWX\Web\Pages\AbstractHtmlPage;
+use JDWX\Web\Pages\HtmlHeadTrait;
+use JDWX\Web\Pages\HtmlPageTrait;
+use Stringable;
 use Twig\Environment;
-use Twig\TemplateWrapper;
 
 
-abstract class AbstractPage extends HtmlPage {
+abstract class AbstractPage extends AbstractHtmlPage {
 
 
-    private readonly TemplateWrapper $template;
+    use CssListTrait;
+    use HtmlHeadTrait;
+    use HtmlPageTrait;
+    use TwigTrait;
 
 
     public function __construct( Environment $env, string $stTemplate, ?string $i_nstDefaultLanguage = null ) {
         parent::__construct( $i_nstDefaultLanguage );
-        if ( ! str_contains( $stTemplate, '.' ) ) {
-            $stTemplate = $stTemplate . '.html';
-        }
-        if ( ! str_contains( $stTemplate, '.twig' ) ) {
-            $stTemplate .= '.twig';
-        }
-        $this->template = $env->load( $stTemplate );
+        $this->twigSetTemplate( $env, $stTemplate );
     }
 
 
-    /** @return iterable<string> */
-    protected function content() : iterable {
-        return $this->template->stream( $this->values() );
+    /** @return iterable<string|Stringable> */
+    public function body() : iterable {
+        yield from $this->twigStream();
     }
-
-
-    /** @return array<string, mixed> */
-    abstract protected function values() : array;
 
 
 }
