@@ -1,6 +1,6 @@
 {
-  "name": "jdwx/web-twig",
-  "description": "A very thin module for using Twig with jdwx/web.",
+  "name": "jdwx/twig",
+  "description": "A very thin module for integrating Twig templates with other modules.",
   "license": "MIT",
   "autoload": {
     "psr-4": {
