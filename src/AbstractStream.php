@@ -9,7 +9,7 @@ namespace JDWX\Twig;
 
 use JDWX\Stream\StringableStreamInterface;
 use JDWX\Stream\StringableStreamTrait;
-use Twig\Environment;
+use JDWX\Twig\Environments\EnvironmentInterface;
 
 
 abstract class AbstractStream implements StringableStreamInterface {
@@ -19,7 +19,7 @@ abstract class AbstractStream implements StringableStreamInterface {
     use TwigTrait;
 
 
-    public function __construct( Environment $env, string $stTemplate ) {
+    public function __construct( EnvironmentInterface $env, string $stTemplate ) {
         $this->twigSetTemplate( $env, $stTemplate );
     }
 

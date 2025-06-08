@@ -7,8 +7,8 @@ declare( strict_types = 1 );
 namespace JDWX\Twig;
 
 
+use JDWX\Twig\Environments\EnvironmentInterface;
 use Stringable;
-use Twig\Environment;
 use Twig\TemplateWrapper;
 
 
@@ -29,13 +29,7 @@ trait TwigTrait {
 
 
     /** @suppress PhanAccessReadOnlyProperty */
-    private function twigSetTemplate( Environment $env, string $i_stTemplate ) : void {
-        if ( ! str_contains( $i_stTemplate, '.' ) ) {
-            $i_stTemplate = $i_stTemplate . '.html';
-        }
-        if ( ! str_contains( $i_stTemplate, '.twig' ) ) {
-            $i_stTemplate .= '.twig';
-        }
+    private function twigSetTemplate( EnvironmentInterface $env, string $i_stTemplate ) : void {
         /** @phpstan-ignore property.readOnlyAssignNotInConstructor */
         $this->template = $env->load( $i_stTemplate );
     }

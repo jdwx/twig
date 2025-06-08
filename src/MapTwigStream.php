@@ -8,7 +8,7 @@ namespace JDWX\Twig;
 
 
 use Ds\Map;
-use Twig\Environment;
+use JDWX\Twig\Environments\EnvironmentInterface;
 
 
 class MapTwigStream extends AbstractStream {
@@ -18,7 +18,7 @@ class MapTwigStream extends AbstractStream {
 
 
     /** @param Map<string, mixed> $map */
-    public function __construct( Environment $env, string $stTemplate, Map $map ) {
+    public function __construct( EnvironmentInterface $env, string $stTemplate, Map $map ) {
         parent::__construct( $env, $stTemplate );
         $this->twigSetMap( $map );
     }
